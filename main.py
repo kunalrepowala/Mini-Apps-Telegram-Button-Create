@@ -10,6 +10,12 @@ from web_server import start_web_server  # Import the web server function
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Coroutine to print 1-2 continuously
+async def print_continuously():
+    while True:
+        print("1-2")
+        await asyncio.sleep(1)  # Pause for 1 second before printing again
+
 async def run_bot() -> None:
     # Get the bot token from the environment variable
     bot_token = os.getenv('TELEGRAM_BOT_TOKEN')  # Fetch the bot token from the environment
@@ -26,8 +32,8 @@ async def run_bot() -> None:
     await app.run_polling()
 
 async def main() -> None:
-    # Run both the bot and the web server concurrently
-    await asyncio.gather(run_bot(), start_web_server())
+    # Run both the bot, web server, and the print_continuously function concurrently
+    await asyncio.gather(run_bot(), start_web_server(), print_continuously())
 
 if __name__ == '__main__':
     asyncio.run(main())
