@@ -26,8 +26,8 @@ async def run_bot() -> None:
     await app.run_polling()
 
 async def main() -> None:
-    # Run both the bot, web server, and the print_continuously function concurrently
-    await asyncio.gather(run_bot(), start_web_server(), print_continuously())
+    # Run both the bot and web server concurrently
+    await asyncio.gather(run_bot(), start_web_server())
 
 if __name__ == '__main__':
     asyncio.run(main())
